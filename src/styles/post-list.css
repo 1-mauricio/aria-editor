@@ -1,0 +1,121 @@
+.admin-container {
+	min-height: 100vh;
+	background-color: var(--background-light-color);
+}
+
+.admin-header {
+	background-color: var(--background-color);
+	padding: 20px;
+	box-shadow: 0 2px 4px var(--shadow-color);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.admin-header h1 {
+	margin: 0;
+	font-size: 24px;
+	color: var(--text-color);
+}
+
+.header-actions {
+	display: flex;
+	gap: 12px;
+}
+
+.new-post-btn {
+	background-color: var(--primary-color);
+	color: var(--button-text);
+	border: none;
+	padding: 8px 16px;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	transition: background-color 0.3s ease;
+}
+
+.logout-btn {
+	background-color: transparent;
+	color: var(--text-color);
+	border: 1px solid var(--border-color);
+	padding: 8px 16px;
+	border-radius: var(--border-radius);
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+
+.admin-content {
+	max-width: 1200px;
+	margin: 0 auto;
+	padding: 20px;
+}
+
+.list-controls {
+	background-color: var(--background-color);
+	padding: 20px;
+	border-radius: var(--border-radius);
+	margin-bottom: 20px;
+	display: flex;
+	gap: 16px;
+	align-items: center;
+}
+
+.filter-input {
+	flex: 1;
+	padding: 8px 12px;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius);
+	background-color: var(--background-lighter-color);
+}
+
+.sort-controls {
+	display: flex;
+	gap: 8px;
+}
+
+.sort-select {
+	padding: 8px;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius);
+	background-color: var(--background-lighter-color);
+}
+
+.sort-direction {
+	padding: 8px 12px;
+	border: 1px solid var(--border-color);
+	border-radius: var(--border-radius);
+	cursor: pointer;
+}
+
+.posts-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+	gap: 20px;
+}
+
+.no-posts {
+	text-align: center;
+	padding: 40px;
+	color: var(--text-light-color);
+	background-color: var(--background-color);
+	border-radius: var(--border-radius);
+}
+
+@media (max-width: 768px) {
+	.admin-header {
+		flex-direction: column;
+		gap: 16px;
+		text-align: center;
+	}
+
+	.list-controls {
+		flex-direction: column;
+	}
+
+	.sort-controls {
+		width: 100%;
+	}
+
+	.sort-select {
+		flex: 1;
+	}
+}
