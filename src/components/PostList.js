@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import PostCard from "./PostCard";
 import { useAuth } from "../contexts/AuthContext";
+import Analytics from "./Analytics";
 
 const PostList = () => {
 	const navigate = useNavigate();
@@ -162,7 +163,11 @@ const PostList = () => {
 						))}
 					</div>
 				)}
+
+			<Analytics />
+
 			</main>
+
 		</div>
 	);
 };

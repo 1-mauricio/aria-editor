@@ -8,6 +8,7 @@ import "./styles/auth.css";
 import "./styles/post-list.css";
 import "./styles/post-card.css";
 import "./styles/post-editor.css";
+import "./styles/analytics.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
