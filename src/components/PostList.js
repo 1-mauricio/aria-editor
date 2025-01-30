@@ -4,11 +4,11 @@ import PostCard from "./PostCard";
 import { useAuth } from "../contexts/AuthContext";
 import Analytics from "./Analytics";
 
-const PostList = () => {
+const PostList = ({ data = [] }) => {
 	const navigate = useNavigate();
 	const { logout } = useAuth();
-	const [posts, setPosts] = useState([]);
-	const [loading, setLoading] = useState(true);
+	const [posts, setPosts] = useState(data);
+	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState(null);
 	const [filter, setFilter] = useState("");
 	const [sortBy, setSortBy] = useState("date");
@@ -17,26 +17,6 @@ const PostList = () => {
 	if (window.tinymce) {
 		window.tinymce.remove();
 	}
-
-	useEffect(() => {
-		fetchPosts();
-	}, []);
-
-	const fetchPosts = async () => {
-		try {
-			setLoading(true);
-			const response = await fetch(
-				"https://imprensamalakoff-backend.onrender.com/api/posts"
-			);
-			if (!response.ok) throw new Error("Falha ao carregar posts");
-			const data = await response.json();
-			setPosts(data);
-		} catch (error) {
-			setError(error.message);
-		} finally {
-			setLoading(false);
-		}
-	};
 
 	const handleDelete = async (postId) => {
 		if (!window.confirm("Tem certeza que deseja deletar este post?"))
@@ -164,7 +144,7 @@ const PostList = () => {
 					</div>
 				)}
 
-			<Analytics />
+			<Analytics posts={posts} />
 
 			</main>
 

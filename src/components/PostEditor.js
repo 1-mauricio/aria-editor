@@ -18,7 +18,6 @@ const PostEditor = () => {
 		customLink: "",
 	});
     const apiKey = process.env.REACT_APP_TINYMCE_API_KEY;
-    console.log(apiKey)
 
 	useEffect(() => {
 		if (id) {
@@ -103,13 +102,12 @@ const PostEditor = () => {
 				throw new Error("Erro ao salvar post");
 			}
 
-            console.log(response)
-
 			navigate("/admin/posts");
 		} catch (error) {
 			setError(error.message);
 		} finally {
 			setIsLoading(false);
+			alert("Post salvo com sucesso!");
 		}
 	};
 

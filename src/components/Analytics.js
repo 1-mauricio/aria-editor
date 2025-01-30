@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
-const Analytics = () => {
+const Analytics = ({posts = []}) => {
 	const [stats, setStats] = useState({
 		totalViews: 0,
 		weeklyViews: 0,
@@ -13,22 +13,9 @@ const Analytics = () => {
 	const [activeTab, setActiveTab] = useState("week");
 
 	useEffect(() => {
-		fetchAnalytics();
+		setStats(calculatePostStatistics(posts));
+		setLoading(false)
 	}, []);
-
-	const fetchAnalytics = async () => {
-		try {
-			const response = await fetch(
-				"https://imprensamalakoff-backend.onrender.com/api/posts"
-			);
-			const data = await response.json();
-			setStats(calculatePostStatistics(data));
-		} catch (error) {
-			console.error("Erro ao carregar analytics:", error);
-		} finally {
-			setLoading(false);
-		}
-	};
 
 	function calculatePostStatistics(posts) {
 		let totalViews = 0;
@@ -37,6 +24,7 @@ const Analytics = () => {
 		let categoryDistribution = {};
 		let topPostsWeek = [];
 		let topPostsMonth = [];
+		let topPostsLikes = [];
 
 		posts.forEach((post) => {
 			totalViews += post.viewCount || 0;
@@ -60,6 +48,12 @@ const Analytics = () => {
 				views: post.viewsThisMonth || 0,
 				period: "month",
 			});
+
+			topPostsLikes.push({
+				id: post.id,
+				title: post.title,
+				likes: post.likes || 0,
+			});
 		});
 
 		topPostsWeek = topPostsWeek
@@ -67,6 +61,9 @@ const Analytics = () => {
 			.slice(0, 5);
 		topPostsMonth = topPostsMonth
 			.sort((a, b) => b.views - a.views)
+			.slice(0, 5);
+		topPostsLikes = topPostsLikes
+			.sort((a, b) => b.likes - a.likes)
 			.slice(0, 5);
 
 		return {
